@@ -11,30 +11,27 @@ MORSE_HASH = {
 }.freeze
 
 def decode_mo_char(char)
-  return MORSE_HASH[char].to_s
+  MORSE_HASH[char].to_s
 end
 
+puts decode_mo_char('.-')
 
-puts decode_mo_char(".-")
+def decode_mo_word(word)
+  dword = ''
 
-def decode_mo_word(word) 
-  _dword = ''
-
-  word.split.each_with_index do |i, index|
-    _dword += decode_mo_char(i)
+  word.split.each_with_index do |i, _index|
+    dword += decode_mo_char(i)
   end
 
-  return _dword.to_s
+  dword.to_s
 end
 
-puts decode_mo_word("-- -.--")
+puts decode_mo_word('-- -.--')
 
 def decode_mo_phrase(str)
   words = str.split(/   /)
   decoded_phrase = ''
   words.each_with_index do |i, index|
-
-
     decoded_phrase = if index.zero?
                        decoded_phrase + decode_mo_word(i)
                      else
