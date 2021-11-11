@@ -11,23 +11,23 @@ MORSE_HASH = {
 }.freeze
 
 def decode_phrase(str)
-  _words = str.split(/   /)
-  _decoded_phrase = ''
-  _words.each_with_index do |i, index|
-    _word = ''
+  words = str.split(/   /)
+  decoded_phrase = ''
+  words.each_with_index do |i, index|
+    word = ''
 
-    _chars = i.split
-    _chars.each do |j|
-      _word += MORSE_HASH[j].to_s
+    chars = i.split
+    chars.each do |j|
+      word += MORSE_HASH[j].to_s
     end
 
-    _decoded_phrase = if index === 0
-                        _decoded_phrase + _word
-                      else
-                        "#{_decoded_phrase} #{_word}"
-                      end
+    decoded_phrase = if index.zero?
+                       decoded_phrase + word
+                     else
+                       "#{decoded_phrase} #{word}"
+                     end
   end
-  _decoded_phrase
+  decoded_phrase
 end
 
 puts decode_phrase('.-   -... --- -..-   ..-. ..- .-.. .-..   --- ..-.   .-. ..- -... .. . ...')
