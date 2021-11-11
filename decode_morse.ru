@@ -10,24 +10,38 @@ MORSE_HASH = {
   '-.--' => 'Y', '--..' => 'Z'
 }.freeze
 
-def decode_phrase(str)
+def decode_mo_char(char)
+  return MORSE_HASH[char].to_s
+end
+
+
+puts decode_mo_char(".-")
+
+def decode_mo_word(word) 
+  _dword = ''
+
+  word.split.each_with_index do |i, index|
+    _dword += decode_mo_char(i)
+  end
+
+  return _dword.to_s
+end
+
+puts decode_mo_word("-- -.--")
+
+def decode_mo_phrase(str)
   words = str.split(/   /)
   decoded_phrase = ''
   words.each_with_index do |i, index|
-    word = ''
 
-    chars = i.split
-    chars.each do |j|
-      word += MORSE_HASH[j].to_s
-    end
 
     decoded_phrase = if index.zero?
-                       decoded_phrase + word
+                       decoded_phrase + decode_mo_word(i)
                      else
-                       "#{decoded_phrase} #{word}"
+                       "#{decoded_phrase} #{decode_mo_word(i)}"
                      end
   end
   decoded_phrase
 end
 
-puts decode_phrase('.-   -... --- -..-   ..-. ..- .-.. .-..   --- ..-.   .-. ..- -... .. . ...')
+puts decode_mo_phrase('.-   -... --- -..-   ..-. ..- .-.. .-..   --- ..-.   .-. ..- -... .. . ...')
